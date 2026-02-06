@@ -10,7 +10,7 @@ import {
   Message,
   Popconfirm
 } from 'tdesign-react';
-import { AddIcon, ViewIcon, RollbackIcon } from 'tdesign-icons-react';
+import { AddIcon, BrowseIcon, RollbackIcon } from 'tdesign-icons-react';
 import { api } from '../utils/api';
 
 export default function OrderList() {
@@ -112,7 +112,7 @@ export default function OrderList() {
             size="small"
             variant="text"
             theme="primary"
-            icon={<ViewIcon />}
+            icon={<BrowseIcon />}
             onClick={() => navigate(`/orders/${data.id}`)}
           >
             查看

@@ -15,7 +15,7 @@ import {
   Message,
   Popconfirm
 } from 'tdesign-react';
-import { LogoutIcon, ViewIcon } from 'tdesign-icons-react';
+import { LogoutIcon, BrowseIcon } from 'tdesign-icons-react';
 import { api } from '../utils/api';
 
 export default function AdminDashboard() {
@@ -150,7 +150,7 @@ export default function AdminDashboard() {
             size="small"
             variant="text"
             theme="primary"
-            icon={<ViewIcon />}
+            icon={<BrowseIcon />}
             onClick={() => navigate(`/admin/orders/${data.id}`)}
           >
             详情
