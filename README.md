@@ -137,7 +137,7 @@ mysql -uroot -p<密码> c2b_order_system -e "INSERT INTO Admin (username, passwo
 # 配置Nginx
 cat > /etc/nginx/conf.d/c2b.conf << 'EOF'
 server {
-    listen 80;
+    listen 8080;
     server_name _;
     client_max_body_size 20M;
 

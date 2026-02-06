@@ -152,7 +152,7 @@ pm2 startup
 # 创建配置文件
 cat > /etc/nginx/conf.d/c2b.conf << 'EOF'
 server {
-    listen 80;
+    listen 8080;
     server_name _;
 
     client_max_body_size 20M;

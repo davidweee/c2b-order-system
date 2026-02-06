@@ -123,7 +123,7 @@ cp -r dist/* /var/www/c2b-frontend/
 ```bash
 cat > /etc/nginx/conf.d/c2b.conf << 'EOF'
 server {
-    listen 80;
+    listen 8080;
     server_name _;
 
     client_max_body_size 20M;
@@ -188,7 +188,7 @@ systemctl status nginx
 
 ### 9. 访问应用
 
-**前端地址**43.138.212.116
+**前端地址**: http://YOUR_SERVER_IP:8080
 
 **管理员登录**:
 - 用户名: admin
