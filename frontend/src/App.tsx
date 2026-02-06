@@ -11,6 +11,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/orders" element={<OrderList />} />
@@ -18,7 +19,6 @@ function App() {
         <Route path="/orders/:id" element={<OrderDetail />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/orders/:id" element={<AdminOrderDetail />} />
-        <Route path="/" element={<Navigate to="/orders" replace />} />
       </Routes>
     </BrowserRouter>
   );
