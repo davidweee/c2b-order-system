@@ -48,7 +48,11 @@ CHAKEN2B_WEB/
 
 ### 1. 数据库准备
 
-确保MySQL已安装并运行，密码为`123`。
+确保MySQL已安装并运行。创建数据库：
+
+```sql
+CREATE DATABASE c2b_order_system CHARACTER SET utf8mb4;
+```
 
 ### 2. 后端启动
 
@@ -60,7 +64,7 @@ npx prisma generate
 # 推送数据库模型
 npx prisma db push
 # 创建管理员账号（可选）
-mysql -uroot -p123 c2b_order_system -e "INSERT INTO Admin (username, password) VALUES ('admin', 'admin123');"
+mysql -u<用户名> -p c2b_order_system -e "INSERT INTO Admin (username, password) VALUES ('admin', 'admin123');"
 # 启动服务
 npm run dev
 ```
@@ -75,20 +79,25 @@ npm run dev
 
 访问 `http://localhost:5173`
 
-## 部署到腾讯云CVM
+## 部署到服务器
 
-服务器信息：
-- IP: 43.138.212.116
-- SSH用户: root
-- SSH密码: Whatrug2d
-- MySQL密码: 123
+部署前请准备服务器信息：
+- 服务器IP地址
+- SSH用户名和密码（或SSH密钥）
+- MySQL密码
+- 数据库名称
 
 ### 部署步骤
 
-1. 安装依赖工具：
+1. 配置服务器环境变量：
 ```bash
-# Windows上安装sshpass
-# 或手动上传文件
+# 创建 .env 文件
+cd backend
+cat > .env << 'EOF'
+PORT=3001
+JWT_SECRET=your-secret-key-change-in-production
+DB_URL=mysql://root:PASSWORD@localhost:3306/c2b_order_system
+EOF
 ```
 
 2. 执行部署脚本：
@@ -109,20 +118,21 @@ cd backend
 npm run build
 cd ..
 
-# 上传到服务器
-scp -r frontend/dist root@43.138.212.116:/var/www/c2b-frontend
-scp -r backend/dist root@43.138.212.116:/var/www/c2b-backend
-scp -r backend/node_modules root@43.138.212.116:/var/www/c2b-backend
-scp -r backend/prisma root@43.138.212.116:/var/www/c2b-backend
-scp backend/package.json root@43.138.212.116:/var/www/c2b-backend
+# 上传到服务器（使用你的服务器IP）
+scp -r frontend/dist root@YOUR_SERVER_IP:/var/www/c2b-frontend
+scp -r backend/dist root@YOUR_SERVER_IP:/var/www/c2b-backend
+scp -r backend/node_modules root@YOUR_SERVER_IP:/var/www/c2b-backend
+scp -r backend/prisma root@YOUR_SERVER_IP:/var/www/c2b-backend
+scp backend/package.json root@YOUR_SERVER_IP:/var/www/c2b-backend
 
 # SSH登录服务器
-ssh root@43.138.212.116
+ssh root@YOUR_SERVER_IP
 
-# 在服务器上执行
+# 在服务器上执行（使用实际的MySQL密码）
 cd /var/www/c2b-backend
 npx prisma generate
 npx prisma db push
+mysql -uroot -p<密码> c2b_order_system -e "INSERT INTO Admin (username, password) VALUES ('admin', 'admin123');"
 
 # 配置Nginx
 cat > /etc/nginx/conf.d/c2b.conf << 'EOF'
@@ -200,8 +210,9 @@ pm2 save
 - 用户名: `admin`
 - 密码: `admin123`
 
-部署后在服务器MySQL中执行：
+部署后创建管理员账号，在MySQL中执行：
 ```sql
+USE c2b_order_system;
 INSERT INTO Admin (username, password) VALUES ('admin', 'admin123');
 ```
 
