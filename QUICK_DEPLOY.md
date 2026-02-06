@@ -7,8 +7,7 @@
 ### 1. SSH登录服务器
 
 ```bash
-ssh root@43.138.212.116
-# 密码: Whatrug2d
+ssh root@
 ```
 
 ### 2. 安装必要软件
@@ -108,7 +107,7 @@ npm install
 
 # 设置生产环境API地址
 cat > .env.production << 'EOF'
-VITE_API_URL=http://43.138.212.116
+VITE_API_URL=http://
 EOF
 
 # 构建前端
@@ -189,7 +188,7 @@ systemctl status nginx
 
 ### 9. 访问应用
 
-**前端地址**: http://43.138.212.116
+**前端地址**43.138.212.116
 
 **管理员登录**:
 - 用户名: admin
@@ -205,7 +204,7 @@ systemctl status nginx
 
 ```bash
 # SSH登录服务器
-ssh root@43.138.212.116
+ssh root@
 
 # 创建docker-compose.yml
 cat > docker-compose.yml << 'EOF'
