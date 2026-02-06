@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Tabs,
-  TabPanel,
   Button,
   Table,
   Card,
@@ -182,24 +181,28 @@ export default function AdminDashboard() {
           </Button>
         </div>
 
-        <Tabs value={activeTab} onChange={setActiveTab}>
-          <TabPanel value="orders" label="订单管理">
-            <Table
+        <Tabs value={activeTab} onChange={setActiveTab} panelList={[
+          {
+            value: 'orders',
+            label: '订单管理',
+            content: <Table
               columns={orderColumns}
               data={orders}
               loading={loading}
               rowKey="id"
             />
-          </TabPanel>
-          <TabPanel value="users" label="用户管理">
-            <Table
+          },
+          {
+            value: 'users',
+            label: '用户管理',
+            content: <Table
               columns={userColumns}
               data={users}
               loading={loading}
               rowKey="id"
             />
-          </TabPanel>
-        </Tabs>
+          }
+        ]} />
       </Card>
 
       <Dialog
